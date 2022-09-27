@@ -11,23 +11,30 @@
         if ($conn->connect_error) {
             die("Erro de conexao com o banco de dados");
         } 
-        // DELETE FROM `Alunos` WHERE `mat`= VALUES(
-        $sql = "SELECT * FROM `alunos`";
-        echo $sql;
-        $resul = $conn->query($sql);
-        echo "Result: ". $resul;
-
-        echo "<br><br>Excluido com SUCESSO!!";
-    }
+        mysqli_select_db($bancodedados, $conn);
+        $query = sprintf("SELECT `Id`, `Nome`, `Matricula`, `Email` FROM `alunos`");
+        $dados = mysqli_query($query, $conn);
+        $linha = mysqli_fetch_assoc($dados);
+        $tot = mysqli_num_rows($dados);
+        }
 ?>
 
 <!Doctype html>
     <html>
         <head>
             <meta charset="UTF-8">
-            <title> Gustavo</title>
+            <title> Listar Todos</title>
         </head>
 
         <body>
+        <?php
+        if($tot > 0) {
+            do {
+    ?>
+                <p><?=$linha['Id']?> / <?=$linha['Nome']?> / <?=$linha['Matricula']?> / <?=$linha['Email']?></p>
+    <?php
+            }while($linha = mysqli_fetch_assoc($dados));
+        }
+        ?>
         </body>
     </html>

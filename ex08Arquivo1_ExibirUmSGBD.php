@@ -15,7 +15,11 @@
     //    $sql = "INSERT INTO `alunos`(`Id`, `Nome`, `Matricula`, `Email`) VALUES (1, '$nome', '$mat', '$email')";
         $sql = "SELECT `Id`, `Nome`, `Matricula`, `Email` FROM `alunos` WHERE `Matricula` = ('$mat')"; 
         $resul = $conn->query($sql);
-        echo $sql;
+        if (mysqli_num_rows($result) > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "Id: " . $row["id"] ."Nome: " . $row["Nome"] . "Matricula: " . $row["Matricula"] . "Email: " . $row["Email"] . "<br>";
+            }
+        }
         
     }
 ?>
