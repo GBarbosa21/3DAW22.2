@@ -18,7 +18,7 @@
                 echo "<tr><td> ID: " . $info['Id'] . "</td>  ";
                 echo "<td> Nome: " . $info['Nome'] . "</td>  ";
                 echo "<td> Periodo: " . $info ['Periodo'] . "</td>  ";
-                echo "<td> Id Pre Requisito" . $info ['IdPreRequisito'] . "</td>  ";
+                echo "<td> Id Pre Requisito: " . $info ['IdPreRequisito'] . "</td>  ";
                 echo "<td> Creditos: " . $info ['Creditos'] . "</td>  ";
                 echo "</tr>";
             }

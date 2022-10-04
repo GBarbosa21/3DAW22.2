@@ -19,7 +19,11 @@
                 echo "<td> Creditos: " . $info ['Creditos'] . "</td>  ";
                 echo "</tr>";
             }
-        };
+        }else
+        {
+            echo "Erro na Captura de dados";
+        }
+        mysqli_close($conn);
 ?>
 
 <!Doctype html>
