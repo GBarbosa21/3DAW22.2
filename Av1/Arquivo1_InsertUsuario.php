@@ -4,8 +4,8 @@
     <title>Pedir ID da Materia</title>
 </head>
 <body>
-    <form action="Arquivo1_Alterar2SGBD.php" method="POST">
-    ID da Materia <input type="text" name="mat"><br>
+    <form action="Arquivo1_InsertUsuario2.php" method="POST">
+    Insira o arquivo com Usuarios <br><br><input type="file" name="arq"><br><br>
     <input type="submit">
     </form>
 

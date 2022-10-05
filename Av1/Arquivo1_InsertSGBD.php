@@ -38,5 +38,7 @@
             <input type="submit">
             </form>
 
+            <br><br><a href="Index.html">Menu principal</a>
+
         </body>
     </html>
