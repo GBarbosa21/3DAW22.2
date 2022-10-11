@@ -1,0 +1,36 @@
+<!Doctype html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title> Gustavo</title>
+            <script>
+                function enviarform(pNome, pMat, pEmail, pCpf){
+                    let xmlHTTP = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange = function() {
+                        if(this.readyState == 4 && this.status==200 ){
+                            console.log("CHEGOU RESPOSTA: " + this.responseText)
+                            document.getElementByUd("msg").innerHtml = this.responseText
+                        }
+                    }
+                    xmlHttp.open("GET" , "http://localhost/3DAW22.2/ex10IncluirAlunosJS.php?nome=" + pNome + "$email" + pEmail + "&cpf" + pCpf + "$mat" + pMat);
+                    xmlHttp.send();
+                    console.log("Enviei requisição");
+                }
+            </script>
+        </head>
+
+        <body>
+            <form>
+            <label> Nome </label>
+            <input type="text" name="nome"><br><br>
+            <label> Matricula </label> 
+            <input type="text" name="mat"><br><br>
+            <label> Email </label>
+            <input type="text" name="email"><br><br>
+            <label> CPF </label>
+            <input type="text" name="cpf"><br>
+            <input type="submit" value="enviar" onclick="enviarform(tnis.nome, this.mat, this.email, this.cpf);">
+            </form>
+            <p id="msg">
+        </body>
+    </html>
