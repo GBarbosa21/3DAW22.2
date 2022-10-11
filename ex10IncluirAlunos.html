@@ -4,7 +4,11 @@
             <meta charset="UTF-8">
             <title> Gustavo</title>
             <script>
-                function enviarform(pNome, pMat, pEmail, pCpf){
+                function enviarform(){ // (pNome, pMat, pEmail, pCpf)
+                let pNome = document.getElementById("nome").value;
+                let pMat = document.getElementById("mat").value;
+                let pEmail = document.getElementById("email").value;
+
                     let xmlHTTP = new XMLHttpRequest();
                     xmlHttp.onreadystatechange = function() {
                         if(this.readyState == 4 && this.status==200 ){
@@ -12,7 +16,7 @@
                             document.getElementByUd("msg").innerHtml = this.responseText
                         }
                     }
-                    xmlHttp.open("GET" , "http://localhost/3DAW22.2/ex10IncluirAlunosJS.php?nome=" + pNome + "$email" + pEmail + "&cpf" + pCpf + "$mat" + pMat);
+                    xmlHttp.open("GET" , "http://localhost/3DAW22.2/ex10IncluirAlunosJS.php?nome=" + pNome + "$email" + pEmail + "$mat" + pMat);
                     xmlHttp.send();
                     console.log("Enviei requisição");
                 }
@@ -27,9 +31,7 @@
             <input type="text" name="mat"><br><br>
             <label> Email </label>
             <input type="text" name="email"><br><br>
-            <label> CPF </label>
-            <input type="text" name="cpf"><br>
-            <input type="submit" value="enviar" onclick="enviarform(tnis.nome, this.mat, this.email, this.cpf);">
+            <input type="submit" value="enviar" onclick="enviarform();">
             </form>
             <p id="msg">
         </body>
