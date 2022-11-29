@@ -9,7 +9,7 @@
     {    
         $id = $_GET["id"];
         $conn = new mysqli ($servidor, $user, $pass, $banco);
-        $sql="SELECT * FROM `carros` where matricula='$id'";
+        $sql="SELECT * FROM `carros` where id='$id'";
         $result=$conn->query($sql);
         $linha = $result->fetch_assoc();
         $i = 0;

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>incluir Carro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function enviarForm() {
+                let pNome = document.getElementById("nome").value;
+                let pMarca = document.getElementById("marca").value;
+                let pPreco = document.getElementById("preco").value;
+                let pCidade = document.getElementById("cidade").value;
+                let pDisponivel = document.getElementById("disponivel").value;
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Chegou resposta: " + this.responseText)
+                        document.getElementById("msg").innerHTML = this.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exIncluirCarro.php=" + pNome +
+                "&marca=" + pMarca + "&preco=" + pPreco + "&Cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.send();
+                console.log("Enviei requisicao");
+            }
+    </script>
+</head>
+<body>
+    <form id="formIncluir">
+      <fieldset>
+          <label>Nome:</label>
+          <input type = "text" name = "nome" id = "nome"><br><br>
+          <label>Marca:</label>
+          <input type = "text" name = "marca" id = "marca"><br><br>
+          <label>Preco:</label>
+          <input type = "text" name = "preco" id = "preco"><br><br>
+          <label>Cidade:</label>
+          <input type = "text" name = "cidade" id = "cidade"><br><br>
+          <label>Disponiveis:</label>
+          <input type = "text" name = "disponivel" id = "disponivel"><br><br>
+          <input type = "button" name = "envio" value="Enviar" 
+            onclick="enviarForm();">
+        </fieldset>
+    </form>
+    <p id="msg">
+    </p>
+</body>
+</html>

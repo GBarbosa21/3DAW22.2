@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Listar Carros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+
+        function enviarForm() {
+                let pNome = document.getElementById("nome").value;
+                let pMarca = document.getElementById("marca").value;
+                let pPreco = document.getElementById("preco").value;
+                let pCidade = document.getElementById("cidade").value;
+                let pDisponivel = document.getElementById("disponivel").value;
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Chegou resposta: " + this.responseText)
+                        document.getElementById("msg").innerHTML = this.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exIncluirCarro.php=" + pNome +
+                "&marca=" + pMarca + "&preco=" + pPreco + "&Cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.send();
+                console.log("Enviei requisicao");
+            }
+
+            function enviarFormAlt() {
+                let pNome = document.getElementById("nome").value;
+                let pMarca = document.getElementById("marca").value;
+                let pPreco = document.getElementById("preco").value;
+                let pCidade = document.getElementById("cidade").value;
+                let pDisponivel = document.getElementById("disponivel").value;
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Chegou resposta: " + this.responseText)
+                        document.getElementById("msg").innerHTML = this.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exAlterarCarro.php?nome=" + pNome +
+                "&marca=" + pMarca + "&preco=" + pPreco + "&cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.send();
+                console.log("Enviei requisicao");
+            }
+
+        function carregaAlunos() {
+            let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                    //    console.log("Chegou resposta: " + this.responseText)
+                    //    document.getElementById("msg").innerHTML = this.responseText;
+                        let obj = JSON.parse(this.responseText);
+                        let x = 0;
+                        for (x=0;x<obj.length;x++) {
+                            console.log("Posicao do Array " + x + " : " + obj[x].nome);
+                            let linha = obj[x];
+                            criarLinhaTabela(linha);
+                        }
+                        console.log("Posicao do x " + x );
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exListarCarrosJS.php");
+                xmlHttp.send();
+        }
+        function criarLinhaTabela(pobjReturnJSON) {
+            let tb = document.getElementById("tab");
+             let tr = document.createElement("tr"); 
+
+             let td1 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.id);
+            td1.appendChild(textnode);
+            tr.appendChild(td1);
+
+            let td2 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.nome);
+            td2.appendChild(textnode);
+            tr.appendChild(td2);
+
+            let td3 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.marca);
+            td5.appendChild(textnode);
+            tr.appendChild(td5);
+
+            let td4 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.preco);
+            td3.appendChild(textnode);
+            tr.appendChild(td3);
+
+            let td5 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.cidade);
+            td4.appendChild(textnode);
+            tr.appendChild(td4);
+
+            let td6 = document.createElement("td");
+            textnode = document.createTextNode(pobjReturnJSON.disponivel);
+            td5.appendChild(textnode);
+            tr.appendChild(td5);
+
+            let tdF = document.createElement("td"); // cria o element td
+            let tagP = document.createElement("span", "onclick");
+            let textnode1 = "buscarCarro'" + pobjReturnJSON.id + "')";
+            tagP.setAttribute("onclick",textnode1);
+            textnode = document.createTextNode("Alterar");
+            tagP.appendChild(textnode);
+
+            tdF.appendChild(tagP);
+            tr.appendChild(tdF);
+
+            tb.appendChild(tr);
+        }
+
+        function buscarCarro(Id) {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                console.log("mudou status: " + this.readyState);
+                if (this.readyState == 4 && this.status == 200) {
+                    let obj = JSON.parse(this.responseText);
+                    document.getElementById("nomeAlt").value = obj.nome;
+                    document.getElementById("marcaAlt").value = obj.marca;
+                    document.getElementById("precoAlt").value = obj.preco;
+                    document.getElementById("cidadeAlt").value = obj.cidade;
+                    document.getElementById("disponivelAlt").value = obj.disponivel;
+                    let formAlt = document.getElementById("formAlterar");
+                    formAlt.style.display = "block";
+                }
+            }
+            xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exBuscarCarro.php?id=" + id);
+            xmlHttp.send();
+        }
+
+    </script>
+</head>
+<body onload="carregaAlunos();">
+
+    <table id="tab" style="border:1px solid">
+        <tr style="border:1px solid">
+            <th style="border:1px solid">Id</th>
+            <th style="border:1px solid">Nome</th>
+            <th style="border:1px solid">Preco</th>
+            <th style="border:1px solid">Cidade</th>
+            <th style="border:1px solid">Disponiveis</th>
+            <th style="border:1px solid">Acoes</th>
+        </tr>
+    </table>
+    <br><br>
+    <form id="formAlterar" style="display:none">
+        <fieldset>
+            <label>Nome:</label>
+            <input type = "text" name = "nome" id = "nomeAlt" value=""><br><br>
+            <label>Marca:</label>
+            <input type = "text" name = "marca" id = "marcaAlt" value=""><br><br>
+            <label>Preco:</label>
+            <input type = "text" name = "preco" id = "precoAlt" value=""><br><br>
+            <label>Cidade:</label>
+            <input type = "text" name = "cidade" id = "cidadeAlt" value=""><br><br>
+            <label>Disponiveis:</label>
+            <input type = "text" name = "disponivel" id = "disponivelAlt" value=""><br><br>
+            <input type = "button" name = "envio" value="Enviar" 
+              onclick="enviarFormAlt();">
+          </fieldset>
+      </form>
+</body>
+</html>
