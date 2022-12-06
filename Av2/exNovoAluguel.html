@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Novo aluguel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function enviarForm() {
+                let pDataAlug = document.getElementById("dataAlug").value;
+                let pPeriodo = document.getElementById("periodo").value;
+                let pClient = document.getElementById("client").value;
+                let pTelClient = document.getElementById("telClient").value;
+                let pPlaca = document.getElementById("Placa").value;
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Chegou resposta: " + this.responseText)
+                        document.getElementById("msg").innerHTML = this.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exNovoAluguel.php=" + "&dataAlug=" + pDataAlug + "&periodo=" + pPeriodo + "&client=" + pClient + "&telClient=" + pTelClient + "&placa" + pPlaca);
+                xmlHttp.send();
+                console.log("Enviei requisicao");
+            }
+    </script>
+</head>
+<body>
+    <form id="formIncluir">
+      <fieldset>
+          <label>Data do Aluguel:</label>
+          <input type = "date" name = "dataAlug" id = "dataAlug"><br><br>
+          <label>Periodo de Aluguel:</label>
+          <input type = "number" name = "periodo" id = "periodo"><br><br>
+          <label>Nome do Cliente:</label>
+          <input type = "text" name = "client" id = "client"><br><br>
+          <label>Tekefone do Cliente:</label>
+          <input type = "tel" name = "telClient" id = "telClient" required placeholder="(xx) xxxxx-xxxx"><br><br>
+          <label>Placa do Carro:</label>
+          <input type = "text" name = "placa" id = "placa"><br><br>
+          <input type = "button" name = "envio" value="Enviar" 
+            onclick="enviarForm();">
+        </fieldset>
+    </form>
+    <p id="msg">
+    </p>
+</body>
+</html>

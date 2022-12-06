@@ -8,12 +8,11 @@
     <script>
 
         function enviarForm() {
-                let pIdModel = document.getElementById("IdModel").value;
-                let pNome = document.getElementById("nome").value;
-                let pMarca = document.getElementById("marca").value;
-                let pPreco = document.getElementById("preco").value;
-                let pCidade = document.getElementById("cidade").value;
-                let pDisponivel = document.getElementById("disponivel").value;
+                let pDataAlug = document.getElementById("dataAlug").value;
+                let pPeriodo = document.getElementById("periodo").value;
+                let pClient = document.getElementById("client").value;
+                let pTelClient = document.getElementById("telClient").value;
+                let pPlaca = document.getElementById("placa").value;
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     console.log("mudou status: " + this.readyState);
@@ -22,18 +21,18 @@
                         document.getElementById("msg").innerHTML = this.responseText;
                     }
                 }
-                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exIncluirCarro.php?idModel=" + IdModel + "nome=" + pNome +
-                "&marca=" + pMarca + "&preco=" + pPreco + "&cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exNovoAluguel.php?dataAlug=" + pDataAlug + "&periodo=" + pPeriodo +  + "&client=" 
+                + pClient + "&telClient=" + pTelClient + "&placa=" + pPlaca);
                 xmlHttp.send();
                 console.log("Enviei requisicao");
             }
 
             function enviarFormAlt() {
-                let pNome = document.getElementById("nome").value;
-                let pMarca = document.getElementById("marca").value;
-                let pPreco = document.getElementById("preco").value;
-                let pCidade = document.getElementById("cidade").value;
-                let pDisponivel = document.getElementById("disponivel").value;
+                let pDataAlug = document.getElementById("dataAlug").value;
+                let pPeriodo = document.getElementById("periodo").value;
+                let pClient = document.getElementById("client").value;
+                let pTelClient = document.getElementById("telClient").value;
+                let pPlaca = document.getElementById("placa").value;
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     console.log("mudou status: " + this.readyState);
@@ -42,8 +41,8 @@
                         document.getElementById("msg").innerHTML = this.responseText;
                     }
                 }
-                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exAlterarCarro.php?nome=" + pNome +
-                "&marca=" + pMarca + "&preco=" + pPreco + "&cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exAlterarAlugueis.php?dataAlug=" + pDataAlug + "&periodo=" + pPeriodo +  + "&client=" 
+                + pClient + "&telClient=" + pTelClient + "&placa=" + pPlaca);
                 xmlHttp.send();
                 console.log("Enviei requisicao");
             }
@@ -65,7 +64,7 @@
                         console.log("Posicao do x " + x );
                     }
                 }
-                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exListarCarrosJS.php");
+                xmlHttp.open("GET", "http://localhost/3daw22/AV2/exListarAlugueis.php");
                 xmlHttp.send();
         }
         function criarLinhaTabela(pobjReturnJSON) {
@@ -73,38 +72,38 @@
              let tr = document.createElement("tr"); 
 
              let td1 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.IdModel);
+            textnode = document.createTextNode(pobjReturnJSON.idAluguel);
             td1.appendChild(textnode);
             tr.appendChild(td1);
 
             let td2 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.nome);
+            textnode = document.createTextNode(pobjReturnJSON.dataAlug);
             td2.appendChild(textnode);
             tr.appendChild(td2);
 
             let td3 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.marca);
+            textnode = document.createTextNode(pobjReturnJSON.periodo);
             td5.appendChild(textnode);
             tr.appendChild(td5);
 
             let td4 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.preco);
+            textnode = document.createTextNode(pobjReturnJSON.client);
             td3.appendChild(textnode);
             tr.appendChild(td3);
 
             let td5 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.cidade);
+            textnode = document.createTextNode(pobjReturnJSON.telClient);
             td4.appendChild(textnode);
             tr.appendChild(td4);
 
             let td6 = document.createElement("td");
-            textnode = document.createTextNode(pobjReturnJSON.disponivel);
+            textnode = document.createTextNode(pobjReturnJSON.placa);
             td5.appendChild(textnode);
             tr.appendChild(td5);
 
             let tdF = document.createElement("td"); // cria o element td
             let tagP = document.createElement("span", "onclick");
-            let textnode1 = "buscarCarro'" + pobjReturnJSON.id + "')";
+            let textnode1 = "BuscarAluguel'" + pobjReturnJSON.id + "')";
             tagP.setAttribute("onclick",textnode1);
             textnode = document.createTextNode("Alterar");
             tagP.appendChild(textnode);
@@ -121,17 +120,17 @@
                 console.log("mudou status: " + this.readyState);
                 if (this.readyState == 4 && this.status == 200) {
                     let obj = JSON.parse(this.responseText);
-                    document.getElementById("idModelAlt").value = obj.idAlt;
-                    document.getElementById("nomeAlt").value = obj.nome;
-                    document.getElementById("marcaAlt").value = obj.marca;
-                    document.getElementById("precoAlt").value = obj.preco;
-                    document.getElementById("cidadeAlt").value = obj.cidade;
-                    document.getElementById("disponivelAlt").value = obj.disponivel;
+                    document.getElementById("idAlt").value = obj.idAluguel;
+                    document.getElementById("dataAlugAlt").value = obj.dataAlug;
+                    document.getElementById("periodoAlt").value = obj.periodo;
+                    document.getElementById("clientAlt").value = obj.client;
+                    document.getElementById("telClientAlt").value = obj.telClient;
+                    document.getElementById("placaAlt").value = obj.placa;
                     let formAlt = document.getElementById("formAlterar");
                     formAlt.style.display = "block";
                 }
             }
-            xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exBuscarCarro.php?idModel=" + IdModel);
+            xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exBuscarAlugueis.php?idAlug=" + idAluguel);
             xmlHttp.send();
         }
 
@@ -141,28 +140,29 @@
 
     <table id="tab" style="border:1px solid">
         <tr style="border:1px solid">
-            <th style="border:1px solid">Id do Modelo</th>
-            <th style="border:1px solid">Nome</th>
-            <th style="border:1px solid">Preco</th>
-            <th style="border:1px solid">Cidade</th>
-            <th style="border:1px solid">Disponiveis</th>
+            <th style="border:1px solid">Id do Aluguel</th>
+            <th style="border:1px solid">Data do Aluguel</th>
+            <th style="border:1px solid">Periodo do Aluguel</th>
+            <th style="border:1px solid">Nome do cliente</th>
+            <th style="border:1px solid">Telefone do Cliente</th>
+            <th style="border:1px solid">Placa do Veiculo</th>
             <th style="border:1px solid">Acoes</th>
         </tr>
     </table>
     <br><br>
     <form id="formAlterar" style="display:none">
         <fieldset>
-            <label>Nome:</label>
-            <input type = "text" name = "nome" id = "nomeAlt" value=""><br><br>
-            <label>Marca:</label>
-            <input type = "text" name = "marca" id = "marcaAlt" value=""><br><br>
-            <label>Preco:</label>
-            <input type = "text" name = "preco" id = "precoAlt" value=""><br><br>
-            <label>Cidade:</label>
-            <input type = "text" name = "cidade" id = "cidadeAlt" value=""><br><br>
-            <label>Disponiveis:</label>
-            <input type = "text" name = "disponivel" id = "disponivelAlt" value=""><br><br>
-            <input type = "button" name = "envio" value="Enviar" 
+        <label>Data do Aluguel:</label>
+          <input type = "date" name = "dataAlug" id = "dataAlugAlt"><br><br>
+          <label>Periodo de Aluguel:</label>
+          <input type = "number" name = "periodo" id = "periodoAlt"><br><br>
+          <label>Nome do Cliente:</label>
+          <input type = "text" name = "client" id = "clientAlt"><br><br>
+          <label>Tekefone do Cliente:</label>
+          <input type = "tel" name = "telClient" id = "telClientAlt" required placeholder="(xx) xxxxx-xxxx"><br><br>
+          <label>Placa do Carro:</label>
+          <input type = "text" name = "placa" id = "placaAlt"><br><br>
+          <input type = "button" name = "envio" value="Enviar" 
               onclick="enviarFormAlt();">
           </fieldset>
       </form>

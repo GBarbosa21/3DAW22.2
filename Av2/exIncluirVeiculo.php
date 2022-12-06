@@ -7,14 +7,11 @@
     $mensagem = "";
     if($_SERVER["REQUEST_METHOD"]=="GET")
     {    
-        $nome = $_GET["nome"];
-        $marca= $_GET["marca"];
-        $preco= $_GET["preco"];
-        $cidade= $_GET["cidade"];
-        $disponivel = $_GET["disponivel"];
+        $Placa = $_GET["placa"];
+        $IdModel= $_GET["IdModel"];
 
         $conn = new mysqli ($servidor, $user, $pass, $banco);
-        $sql="INSERT INTO `veiculos`(`nome`, `marca`, `preco`, `cidade`, `disponivel`) VALUES ('$nome', '$matricula', '$email', '$preco', '$cidade', '$disponivel')";
+        $sql="INSERT INTO `Carros`(`Placa`, `IdModel`) VALUES ('$Placa', '$IdModel')";
         $result=$conn->query($sql);
         echo $result;
         echo $sql;

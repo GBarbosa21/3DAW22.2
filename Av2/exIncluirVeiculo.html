@@ -7,11 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         function enviarForm() {
-                let pNome = document.getElementById("nome").value;
-                let pMarca = document.getElementById("marca").value;
-                let pPreco = document.getElementById("preco").value;
-                let pCidade = document.getElementById("cidade").value;
-                let pDisponivel = document.getElementById("disponivel").value;
+                let pPlaca = document.getElementById("placa").value;
+                let pIdModel = document.getElementById("IdModel").value;
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
                     console.log("mudou status: " + this.readyState);
@@ -20,7 +17,8 @@
                         document.getElementById("msg").innerHTML = this.responseText;
                     }
                 }
-                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exIncluirCarro.php=" + "&marca=" + pMarca + "&preco=" + pPreco + "&Cidade=" + pCidade + "&disponivel" + pDisponivel);
+                xmlHttp.open("GET", "http://localhost/3DAW22/AV2/exIncluirVeiculo.php?placa=" + pPlaca +
+                "&IdModel=" + pIdModel);
                 xmlHttp.send();
                 console.log("Enviei requisicao");
             }
@@ -29,16 +27,10 @@
 <body>
     <form id="formIncluir">
       <fieldset>
-          <label>Nome:</label>
-          <input type = "text" name = "nome" id = "nome"><br><br>
-          <label>Marca:</label>
-          <input type = "text" name = "marca" id = "marca"><br><br>
-          <label>Preco:</label>
-          <input type = "text" name = "preco" id = "preco"><br><br>
-          <label>Cidade:</label>
-          <input type = "text" name = "cidade" id = "cidade"><br><br>
-          <label>Disponiveis:</label>
-          <input type = "text" name = "disponivel" id = "disponivel"><br><br>
+          <label>Placa:</label>
+          <input type = "text" name = "Placa" id = "Placa"><br><br>
+          <label>Id do Modelo:</label>
+          <input type = "text" name = "IdModel" id = "IdModel"><br><br>
           <input type = "button" name = "envio" value="Enviar" 
             onclick="enviarForm();">
         </fieldset>
